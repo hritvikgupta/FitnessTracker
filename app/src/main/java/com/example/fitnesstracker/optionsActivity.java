@@ -2,6 +2,7 @@ package com.example.fitnesstracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +41,13 @@ public class optionsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(optionsActivity.this, "Clicked on" + " " + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
+                if(adapterView.getItemAtPosition(i).equals("Meals"))
+                {
+                    Intent intent = new Intent(optionsActivity.this, com.example.fitnesstracker.meals.mealsActivity.class);
+                    startActivity(intent);
+                }
             }
+
         });
     }
 }
