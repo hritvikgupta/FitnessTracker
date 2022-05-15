@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_meal_recycler1.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/fragment_meal_recycler2.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/option_adapter.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/saved_meals_recycler_adapter.xml" value="0.46028296442621264" />
       </map>
     </option>
   </component>

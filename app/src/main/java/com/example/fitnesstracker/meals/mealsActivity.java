@@ -1,31 +1,46 @@
 package com.example.fitnesstracker.meals;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitnesstracker.R;
 
-public class mealsActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    String [] opt = {"BreakFask", "Lunch", "Dinner", "Snacks"};
+public class mealsActivity extends AppCompatActivity implements saveMealsRecyclerViewAdapter.onSpinClicked{
+
+    String [] opt = {"BreakFast", "Lunch", "Dinner", "Snacks"};
     Spinner spinMeals;
-    TextView test;
+    TextView mealText;
+    Button mealBtn;
+    int Pos;
+    FragmentManager fragmentManager;
+    mealRecyclerFragment1 mfrag;
+
+    ArrayList<savedMeals> sMeals;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meals);
 
+
+        mealBtn = findViewById(R.id.mealBtn);
         spinMeals = findViewById(R.id.spinMeals);
-        test = findViewById(R.id.test);
+        mealText = findViewById(R.id.mealText);
+        fragmentManager = mealsActivity.this.getSupportFragmentManager();
+        mfrag = (mealRecyclerFragment1) fragmentManager.findFragmentById(R.id.mealFragment1);
 
         /*
         http://www.ahotbrew.com/android-dropdown-spinner-example/
@@ -46,9 +61,10 @@ public class mealsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                String name = (String) parent.getItemAtPosition(position);
+                name = (String) parent.getItemAtPosition(position);
+                Pos = position;
                 //Toast.makeText(mealsActivity.this, "Clicked" + name, Toast.LENGTH_SHORT).show();
-                test.setText(name);
+
 
 
             }
@@ -60,6 +76,31 @@ public class mealsActivity extends AppCompatActivity {
 
          });
 
+         mealBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 String item = mealText.getText().toString().trim();
+                 savedMeals m1;
+                 if(name.equals("BreakFast")) {
+                     m1 = new savedMeals(item, "", "", "");
+                     savedMealsApplicationClass.saveMeals.add(m1);
+                     mfrag.notifyChanged();
+                 }
+                 else if(name.equals("Lunch")){
+                     m1 = new savedMeals("", item, "", "");
+
+                 }
+
+
+             }
+         });
+
+
+    }
+
+
+    @Override
+    public void spinClicked(int index) {
 
     }
 }
